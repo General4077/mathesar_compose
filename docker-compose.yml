@@ -184,4 +184,4 @@ services:
     ports:
       - 4077:80
     volumes:
-      - nginx.conf:/etc/nginx/nginx.conf
+      - /data/compose/19/nginx.conf:/etc/nginx/nginx.conf
