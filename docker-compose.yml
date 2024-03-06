@@ -165,9 +165,6 @@ services:
     volumes:
       - ./msar/static:/code/static
       - ./msar/media:/code/media
-    depends_on:
-      db:
-        condition: service_healthy
     healthcheck:
       test: curl -f http://localhost:8000
       interval: 10s
