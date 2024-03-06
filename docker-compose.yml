@@ -1,4 +1,47 @@
+version: "3.9"
+
+# This file defines a viable production setup for Mathesar.
+#
+# It can be used in production directly, or used as an example to help define
+# your own infrastructure.
+#
+#-------------------------------------------------------------------------------
+# PREREQUISITES
+#
+# Please double-check that your docker setup meets the following criteria:
+#
+# OS: Linux, Mac, Windows(WSL).
+# Docker v23+  $ docker version
+# Docker Compose v2.10+  $ docker compose version
+#
+#-------------------------------------------------------------------------------
+# HOW TO USE THIS FILE
+#
+# First, make sure you meet the prerequisites, add a secret key below, and then
+# run:
+#
+# $ docker compose -f docker-compose.yml up
+#
+# Note: You may need to run Docker commands using sudo, depending on your setup.
+# Running Docker in rootless mode isn't currently supported.
+#
+#-------------------------------------------------------------------------------
+# CONFIG
+#
+# Customize your Mathesar installation with the following variables.
+# See https://docs.mathesar.org/configuration/env-variables/ for more info.
+#
+x-config: &config
+  # (REQUIRED) Replace '?' with '-' followed by a 50 character random string.
+  # You can generate one at https://djecrety.ir/ or by running:
+  #   echo $(cat /dev/urandom | LC_CTYPE=C tr -dc 'a-zA-Z0-9' | head -c 50)
+  SECRET_KEY: ${SECRET_KEY:?}
+
+  # (Optional) Replace 'http://localhost' with custom domain(s) e.g.
+  # 'yourdomain.com, 127.0.0.1' to manage the host(s) at which you want to
+  # access Mathesar over http or https
   DOMAIN_NAME: ${DOMAIN_NAME:-http://localhost}
+
 
   # Edit the POSTGRES_* variables if you are not using the db service provided
   # below, or if you want to use a custom database user.
